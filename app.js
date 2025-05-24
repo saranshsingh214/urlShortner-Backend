@@ -16,13 +16,22 @@ const app = express();
 
 const allowedOrigins = [
   'http://localhost:5173',
-  'https://your-frontend-site.netlify.app',
+  'https://urlshortner214.netlify.app', // <== Add your deployed frontend
 ];
 
-app.use(cors({
-  origin: allowedOrigins,
+const corsOptions = {
+  origin: (origin, callback) => {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
   credentials: true,
-}));
+};
+
+app.use(cors(corsOptions));
+
 
 
 app.use(express.json())
