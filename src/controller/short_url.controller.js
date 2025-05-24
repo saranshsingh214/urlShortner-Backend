@@ -6,9 +6,9 @@ import {
 import wrapAsync from "../utils/tryCatchWrapper.js";
 
 const getCleanAppUrl = () => {
-  // Remove trailing slash if any and hidden characters
-  return process.env.APP_URL.trim().replace(/\/$/, "");
+  return (process.env.APP_URL || "").trim().replace(/[\0-\x1F\x7F-\x9F]/g, "").replace(/\/$/, "");
 };
+
 
 export const createShortUrl = wrapAsync(async (req, res) => {
   const data = req.body;

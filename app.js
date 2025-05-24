@@ -49,9 +49,12 @@ app.use(errorHandler)
 
 const PORT = process.env.PORT || 3000;
 
+
 app.listen(PORT, () => {
   connectDB();
   console.log(`Server is running on http://localhost:${PORT}`);
+  console.log("APP_URL: ", JSON.stringify(process.env.APP_URL));
+
 });
 
 
